@@ -1,56 +1,60 @@
-const {response } = require('express');
+const { response, request } = require('express');
 
-const usuariosGet=(req,res=response)=>{
 
-    const {q, nombre='No Name', apikey,page=1,limit} = req.query;
+const usuariosGet = (req = request, res = response) => {
+
+    const { q, nombre = 'No name', apikey, page = 1, limit } = req.query;
+
     res.json({
-        msg:'get API - Controlador',
+        msg: 'get API - controlador',
         q,
         nombre,
         apikey,
-        page,
+        page, 
         limit
     });
 }
 
-const usuarioPost=(req,res=response)=>{
-    const {nombre,edad,id,page, limit=1} = req.body;
+const usuariosPost = (req, res = response) => {
 
-    res.status(201).json({
+    const { nombre, edad } = req.body;
 
-        msg:'post API',
-        nombre,
-        edad,
+    res.json({
+        msg: 'post API - usuariosPost',
+        nombre, 
+        edad
+    });
+}
+
+const usuariosPut = (req, res = response) => {
+
+    const { id } = req.params;
+
+    res.json({
+        msg: 'put API - usuariosPut',
         id
     });
 }
 
-const usuariosPut=(req,res=response)=>{
-
-    const {id}=req.params;
-    res.status(400).json({
-        msg:'put API',
-        id
+const usuariosPatch = (req, res = response) => {
+    res.json({
+        msg: 'patch API - usuariosPatch'
     });
 }
 
-const usuariosPatch=(req,res=response)=>{
+const usuariosDelete = (req, res = response) => {
     res.json({
-        msg:'patch API'
+        msg: 'delete API - usuariosDelete'
     });
 }
-const usuariosDelete=(req,res=response)=>{
-    res.json({
-        msg:'Delete API'
-    });
-}
+
 
 
 
 module.exports = {
     usuariosGet,
-    usuarioPost,
+    usuariosPost,
     usuariosPut,
     usuariosPatch,
-    usuariosDelete
+    usuariosDelete,
 }
